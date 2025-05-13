@@ -6,10 +6,9 @@ class Todo {
   _setEventListeners() {
     this._todoCheckboxEl.addEventListener("change", () => {
       this._data.completed = !this._data.completed;
-      console.log(this._data.completed);
     });
 
-    this._todoDeleteBtn.addEventListener("click", () => {
+    this._deleteTodoBtn.addEventListener("click", () => {
       this._todoElement.remove();
     });
   }
@@ -22,8 +21,8 @@ class Todo {
     this._todoLabel.setAttribute("for", `todo-${this._data.id}`);
   }
 
-  _todoDeleteBtn() {
-    this._todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
+  _deleteTodoBtn() {
+    this._deleteTodoBtn = this._todoElement.querySelector(".todo__delete-btn");
   }
 
   getView() {
@@ -35,13 +34,34 @@ class Todo {
     const todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
 
     todoNameEl.textContent = this._data.name;
-    todoDate.textContent = `Due: ${this._data.date.toLocaleString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    })}`;
 
-    this._todoDeleteBtn();
+    todoDate.textContent =
+      this._data.date == "Invalid Date"
+        ? null
+        : `Due: ${this._data.date.toLocaleString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })}`;
+
+    // if (this._data.date == "Invalid Date")
+    // {
+    //   todoDate.textContent = "";
+    // }
+    // else{
+    //   todoDate.textContent = `Due: ${this._data.date.toLocaleString("en-US", {
+    //         year: "numeric",
+    //         month: "short",
+    //         day: "numeric",
+    //       })}`;
+    // }
+    // todoDate.textContent = `Due: ${this._data.date.toLocaleString("en-US", {
+    //   year: "numeric",
+    //   month: "short",
+    //   day: "numeric",
+    // })}`;
+
+    this._deleteTodoBtn();
     this._generateCheckboxEl();
     this._setEventListeners();
 
