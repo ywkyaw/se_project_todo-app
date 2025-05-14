@@ -21,18 +21,13 @@ class Todo {
     this._todoLabel.setAttribute("for", `todo-${this._data.id}`);
   }
 
-  _deleteTodoBtn() {
-    this._deleteTodoBtn = this._todoElement.querySelector(".todo__delete-btn");
-  }
-
   getView() {
     this._todoElement = this._templateElement.content
       .querySelector(".todo")
       .cloneNode(true);
     const todoNameEl = this._todoElement.querySelector(".todo__name");
     const todoDate = this._todoElement.querySelector(".todo__date");
-    const todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
-
+    this._deleteTodoBtn = this._todoElement.querySelector(".todo__delete-btn");
     todoNameEl.textContent = this._data.name;
 
     todoDate.textContent =
@@ -61,7 +56,6 @@ class Todo {
     //   day: "numeric",
     // })}`;
 
-    this._deleteTodoBtn();
     this._generateCheckboxEl();
     this._setEventListeners();
 
